@@ -288,7 +288,7 @@
             <source>ZINT_HEIGHT</source>
         </trans-unit>
         <trans-unit d4:value="white_space:S" id="92EAB1E453D34AB18B5E288CE29FBF55.2">
-            <source>ZINT_WITE_SPACE</source>
+            <source>ZINT_WHITE_SPACE</source>
         </trans-unit>
         <trans-unit d4:value="border:S" id="92EAB1E453D34AB18B5E288CE29FBF55.3">
             <source>ZINT_BORDER</source>
