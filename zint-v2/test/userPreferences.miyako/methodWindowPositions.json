@@ -144,8 +144,8 @@
 		"height": 762
 	},
 	"Sources/Methods/TEST.4dm": {
-		"left": 450,
-		"top": 188,
+		"left": 314,
+		"top": 479,
 		"width": 877,
 		"height": 637
 	},
@@ -154,5 +154,11 @@
 		"top": 163,
 		"width": 877,
 		"height": 662
+	},
+	"Sources/Methods/TEST_QR.4dm": {
+		"left": 516,
+		"top": 246,
+		"width": 877,
+		"height": 637
 	}
 }

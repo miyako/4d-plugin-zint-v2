@@ -180,21 +180,45 @@ void ZINT(PA_PluginParameters params) {
 					eVTC_UTF_8);
 			}    
             
+            switch (sym->symbology) {
+                case BARCODE_MICROQR:
+                    switch (sym->option_2) {
+                        case 1:
+                            sym->option_2 = 0;
+                            break;
+                        case 2:
+                            sym->option_2 = 1;
+                            break;
+                        case 3:
+                            sym->option_2 = 2;
+                            break;
+                        case 4:
+                            sym->option_2 = 3;
+                        default:
+                            break;
+                    }
+                    break;
+                    
+                default:
+                    break;
+            }
+            
             unsigned char *s = (unsigned char *)&buf[0];
             
             if(!ZBarcode_Encode(sym, s, n))
             {
-                    
                 switch(format)
                 {
-                    case ZINT_OUTPUT_SVG:
-                        toSVG(sym, dpi, rotate_angle, no_background, returnValue);
-                        break;
                     case ZINT_OUTPUT_PNG:
                         toPNG(sym, dpi, rotate_angle, no_background, returnValue);
                         break;
+                        
+                    case ZINT_OUTPUT_SVG:
+                    default:
+                        toSVG(sym, dpi, rotate_angle, no_background, returnValue);
+                        break;
                 }
-                
+
             }
             ZBarcode_Delete(sym);
         }
