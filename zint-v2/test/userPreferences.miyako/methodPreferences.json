@@ -170,15 +170,6 @@
 		"bookmarks": [],
 		"stamp": "2019-07-02T23:15:40.975Z"
 	},
-	"Sources/Methods/TEST.4dm": {
-		"startSelection": 38,
-		"endSelection": 0,
-		"firstSelectedLine": 6,
-		"lastSelectedLine": 6,
-		"folding": [],
-		"bookmarks": [],
-		"stamp": "2020-06-26T09:07:10.998Z"
-	},
 	"Sources/Methods/TEST_v17.4dm": {
 		"startSelection": 0,
 		"endSelection": 0,
@@ -188,13 +179,22 @@
 		"bookmarks": [],
 		"stamp": "2019-07-07T00:13:49.000Z"
 	},
-	"Sources/Methods/TEST_QR.4dm": {
-		"startSelection": 3,
-		"endSelection": 3,
-		"firstSelectedLine": 9,
-		"lastSelectedLine": 9,
+	"Sources/Methods/TEST_SVG.4dm": {
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 18,
+		"lastSelectedLine": 18,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2020-07-09T15:05:14.178Z"
+		"stamp": "2021-03-21T13:34:31.710Z"
+	},
+	"Sources/Methods/TEST_MICROQR.4dm": {
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 24,
+		"lastSelectedLine": 24,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2021-03-21T13:51:18.091Z"
 	}
 }

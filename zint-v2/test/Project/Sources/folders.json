@@ -9,7 +9,7 @@
 			"generate_project_source",
 			"generate_project_vs",
 			"generate_project_xcode",
-			"TEST"
+			"TEST_SVG"
 		]
 	},
 	"trash": {}

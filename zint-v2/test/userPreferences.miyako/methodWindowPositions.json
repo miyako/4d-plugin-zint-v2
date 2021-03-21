@@ -143,22 +143,22 @@
 		"width": 1129,
 		"height": 762
 	},
-	"Sources/Methods/TEST.4dm": {
-		"left": 314,
-		"top": 479,
-		"width": 877,
-		"height": 637
-	},
 	"Sources/Methods/TEST_v17.4dm": {
 		"left": 450,
 		"top": 163,
 		"width": 877,
 		"height": 662
 	},
-	"Sources/Methods/TEST_QR.4dm": {
-		"left": 679,
-		"top": 434,
+	"Sources/Methods/TEST_SVG.4dm": {
+		"left": 257,
+		"top": 388,
 		"width": 877,
-		"height": 637
+		"height": 559
+	},
+	"Sources/Methods/TEST_MICROQR.4dm": {
+		"left": 139,
+		"top": 310,
+		"width": 877,
+		"height": 559
 	}
 }

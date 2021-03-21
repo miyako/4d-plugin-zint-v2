@@ -28,8 +28,14 @@
 				"preemptive": "capable"
 			}
 		},
-		"TEST": {
-			"timeStamp": "2020-06-26T09:07:10.000Z"
+		"TEST_MICROQR": {
+			"timeStamp": "2021-03-21T13:47:58.921Z"
+		},
+		"TEST_SVG": {
+			"timeStamp": "2021-03-21T13:34:31.710Z",
+			"attributes": {
+				"invisible": true
+			}
 		},
 		"generate_project": {
 			"timeStamp": "2019-11-26T00:00:28.000Z"
@@ -54,9 +60,6 @@
 				"invisible": true,
 				"preemptive": "capable"
 			}
-		},
-		"TEST_QR": {
-			"timeStamp": "2020-07-09T15:05:14.178Z"
 		}
 	}
 }
