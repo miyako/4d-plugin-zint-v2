@@ -17,4 +17,4 @@ to compile libnpng for ARM, add
 set(CMAKE_SYSTEM_PROCESSOR arm CACHE INTERNAL "")
 ```
 
-to CMakeLists.txt, build, `lipo -create`.
+to CMakeLists.txt, set architecture to `arm` in Xcode, build, `lipo -create`.
