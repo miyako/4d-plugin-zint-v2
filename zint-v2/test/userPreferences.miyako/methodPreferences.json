@@ -189,12 +189,12 @@
 		"stamp": "2019-07-07T00:13:49.000Z"
 	},
 	"Sources/Methods/TEST_QR.4dm": {
-		"startSelection": 0,
-		"endSelection": 0,
-		"firstSelectedLine": 11,
-		"lastSelectedLine": 11,
+		"startSelection": 3,
+		"endSelection": 3,
+		"firstSelectedLine": 9,
+		"lastSelectedLine": 9,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2020-07-08T22:19:24.297Z"
+		"stamp": "2020-07-09T15:05:14.178Z"
 	}
 }
