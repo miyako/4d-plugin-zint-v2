@@ -17,4 +17,4 @@ to compile libnpng for ARM, add
 set(CMAKE_SYSTEM_PROCESSOR arm CACHE INTERNAL "")
 ```
 
-to CMakeLists.txt, build, `lipo` with Intel output.
+to CMakeLists.txt, build, `lipo -create`.
