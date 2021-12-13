@@ -213,6 +213,10 @@ void ZINT(PA_PluginParameters params) {
                         toPNG(sym, dpi, rotate_angle, no_background, returnValue);
                         break;
                         
+                    case ZINT_Format_SVG_12:
+                        toSVG(sym, dpi, rotate_angle, no_background, returnValue, true);
+                        break;
+                        
                     case ZINT_OUTPUT_SVG:
                     default:
                         toSVG(sym, dpi, rotate_angle, no_background, returnValue);
@@ -465,7 +469,7 @@ void output_flush_fn(png_structp png_ptr)
     
 }
 
-void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o) {
+void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o, bool isCMYK) {
     
         int i, block_width, latch, r, this_row;
         float textpos, large_bar_height, preset_height, row_height, row_posn = 0.0;
@@ -574,7 +578,12 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
         
         std::string svg;
         svg += "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\n";
-        svg += "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
+    
+        if(isCMYK){
+            //no official DTD for SVG 1.2
+        }else{
+            svg += "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
+        }
 
         char _width[33];
         char _height[33];
@@ -592,7 +601,12 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
         char _dpi[33];
         sprintf(_dpi, "%d", dpi);
         
-        svg += "<svg version=\"1.1\" width=\"100%\" height=\"100%\" viewBox=\"0 0 ";
+        if(isCMYK){
+            svg += "<svg version=\"1.2\" width=\"100%\" height=\"100%\" viewBox=\"0 0 ";
+        }else{
+            svg += "<svg version=\"1.1\" width=\"100%\" height=\"100%\" viewBox=\"0 0 ";
+        }
+    
         switch (rotate_angle)
         {
       case 90:
@@ -729,7 +743,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
         {
             svg +="\" fill=\"none\" />\n";
         }else{
-            svg +="\" fill=\"#FFFFFF\" />\n";
+            if(isCMYK){
+                svg +="\" fill=\"#FFFFFF device-cmyk(0, 0, 0, 0)\" />\n";
+            }else{
+                svg +="\" fill=\"#FFFFFF\" />\n";
+            }
         }
 
         if(symbol->symbology == BARCODE_MAXICODE) {
@@ -801,7 +819,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _cy;
                 svg += "\" r=\"";
                 svg += _r;
-                svg += "\" stroke-width=\"0\" stroke=\"none\" fill=\"#FFFFFF\" />\n";
+                if(isCMYK){
+                    svg += "\" stroke-width=\"0\" stroke=\"none\" fill=\"#FFFFFF device-cmyk(0, 0, 0, 0)\" />\n";
+                }else{
+                    svg += "\" stroke-width=\"0\" stroke=\"none\" fill=\"#FFFFFF\" />\n";
+                }
             }
             
             svg += "<circle cx=\"";
@@ -810,7 +832,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
             svg += _cy;
             svg += "\" r=\"";
             svg += _r;
-            svg += "\" stroke-width=\"1.88\" stroke=\"#000000\" fill=\"none\" />\n";
+            if(isCMYK){
+                svg += "\" stroke-width=\"1.88\" stroke=\"#000000 device-cmyk(0, 0, 0, 1)\" fill=\"none\" />\n";
+            }else{
+                svg += "\" stroke-width=\"1.88\" stroke=\"#000000\" fill=\"none\" />\n";
+            }
             
             sprintf(_r, "%.2f", 6.15 * scaler);
             
@@ -820,7 +846,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
             svg += _cy;
             svg += "\" r=\"";
             svg += _r;
-            svg += "\" stroke-width=\"1.88\" stroke=\"#000000\" fill=\"none\" />\n";
+            if(isCMYK){
+                svg += "\" stroke-width=\"1.88\" stroke=\"#000000 device-cmyk(0, 0, 0, 1)\" fill=\"none\" />\n";
+            }else{
+                svg += "\" stroke-width=\"1.88\" stroke=\"#000000\" fill=\"none\" />\n";
+            }
             
             sprintf(_r, "%.2f", 2.39 * scaler);
             
@@ -830,9 +860,14 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
             svg += _cy;
             svg += "\" r=\"";
             svg += _r;
-            svg += "\" stroke-width=\"1.88\" stroke=\"#000000\" fill=\"none\" />\n";
+            if(isCMYK){
+                svg += "\" stroke-width=\"1.88\" stroke=\"#000000 device-cmyk(0, 0, 0, 1)\" fill=\"none\" />\n";
+                svg += "<g stroke-width=\"0.18\" stroke=\"#000000 device-cmyk(0, 0, 0, 1)\">\n";
+            }else{
+                svg += "\" stroke-width=\"1.88\" stroke=\"#000000\" fill=\"none\" />\n";
+                svg += "<g stroke-width=\"0.18\" stroke=\"#000000\">\n";
+            }
             
-            svg += "<g stroke-width=\"0.18\" stroke=\"#000000\">\n";
             for(r = 0; r < symbol->rows; r++) {
                 for(i = 0; i < symbol->width; i++) {
                     if(zint::module_is_set(symbol, r, i)) {

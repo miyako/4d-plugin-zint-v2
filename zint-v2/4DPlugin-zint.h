@@ -44,6 +44,7 @@
 
 #define ZINT_OUTPUT_SVG 1
 #define ZINT_OUTPUT_PNG 2
+#define ZINT_Format_SVG_12 3
 
 #include "4DPlugin-JSON.h"
 
@@ -60,7 +61,7 @@ void ZINT(PA_PluginParameters params);
 extern "C" { FILE __iob_func[3] = { *stdin,*stdout,*stderr }; }
 #endif
 
-void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o);
+void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o, bool isCMYK = false);
 void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o);
 
 void write_data_fn(png_structp png_ptr, png_bytep buf, png_size_t size);
