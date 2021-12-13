@@ -769,7 +769,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
                 sprintf(_y, "%.2f", (72.0 + symbol->border_width) * scaler);
                 svg += "<rect x=\"";
                 svg += _x;
@@ -779,7 +783,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
             }
             if((symbol->output_options & BARCODE_BOX) != 0) {
                 /* side bars */
@@ -795,7 +803,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
                 sprintf(_x, "%.2f", (74.0 + xoffset + xoffset - symbol->border_width) * scaler);
                 svg += "<rect x=\"";
                 svg += _x;
@@ -805,7 +817,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
             }
             sprintf(_cx, "%.2f", (35.76 + xoffset) * scaler);
             sprintf(_cy, "%.2f", (35.60 + yoffset) * scaler);
@@ -999,7 +1015,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         latch = 0;
                     } else {
                         /* a space */
@@ -1035,7 +1055,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         sprintf(_x, "%.2f", (2 + xoffset) * scaler);
                         svg += "<rect x=\"";
                         svg += _x;
@@ -1045,7 +1069,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         sprintf(_x, "%.2f", (32 + xoffset) * scaler);
                         svg += "<rect x=\"";
                         svg += _x;
@@ -1055,7 +1083,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         sprintf(_x, "%.2f", (34 + xoffset) * scaler);
                         svg += "<rect x=\"";
                         svg += _x;
@@ -1065,7 +1097,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         sprintf(_x, "%.2f", (64 + xoffset) * scaler);
                         svg += "<rect x=\"";
                         svg += _x;
@@ -1075,7 +1111,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         sprintf(_x, "%.2f", (66 + xoffset) * scaler);
                         svg += "<rect x=\"";
                         svg += _x;
@@ -1085,7 +1125,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         for(i = 0; i < 4; i++) {
                             textpart[i] = symbol->text[i];
                         }
@@ -1167,7 +1211,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         sprintf(_x, "%.2f", (2 + xoffset) * scaler);
                         svg += "<rect x=\"";
                         svg += _x;
@@ -1177,7 +1225,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         sprintf(_x, "%.2f", (46 + xoffset) * scaler);
                         svg += "<rect x=\"";
                         svg += _x;
@@ -1187,7 +1239,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         sprintf(_x, "%.2f", (48 + xoffset) * scaler);
                         svg += "<rect x=\"";
                         svg += _x;
@@ -1197,7 +1253,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         sprintf(_x, "%.2f", (92 + xoffset) * scaler);
                         svg += "<rect x=\"";
                         svg += _x;
@@ -1207,7 +1267,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         sprintf(_x, "%.2f", (94 + xoffset) * scaler);
                         svg += "<rect x=\"";
                         svg += _x;
@@ -1217,7 +1281,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         textpart[0] = symbol->text[0];
                         textpart[1] = '\0';
                         textpos = -7;
@@ -1325,7 +1393,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         latch = 0;
                     } else {
                         /* a space */
@@ -1345,7 +1417,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
                 sprintf(_x, "%.2f", (48 + xoffset) * scaler);
                 svg += "<rect x=\"";
                 svg += _x;
@@ -1355,7 +1431,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
                 latch = 1;
                 i = 85 + comp_offset;
                 do {
@@ -1377,7 +1457,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += _w;
                         svg += "\" height=\"";
                         svg += _h;
-                        svg += "\" />\n";
+                        if(isCMYK){
+                            svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                        }else{
+                            svg += "\" />\n";
+                        }
                         latch = 0;
                     } else {
                         /* a space */
@@ -1495,7 +1579,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
                 sprintf(_x, "%.2f", (2 + xoffset) * scaler);
                 svg += "<rect x=\"";
                 svg += _x;
@@ -1505,7 +1593,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
                 sprintf(_x, "%.2f", (46 + xoffset) * scaler);
                 svg += "<rect x=\"";
                 svg += _x;
@@ -1515,7 +1607,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
                 sprintf(_x, "%.2f", (48 + xoffset) * scaler);
                 svg += "<rect x=\"";
                 svg += _x;
@@ -1525,7 +1621,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
                 sprintf(_x, "%.2f", (50 + xoffset) * scaler);
                 svg += "<rect x=\"";
                 svg += _x;
@@ -1535,7 +1635,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 svg += _w;
                 svg += "\" height=\"";
                 svg += _h;
-                svg += "\" />\n";
+                if(isCMYK){
+                    svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                }else{
+                    svg += "\" />\n";
+                }
                 textpart[0] = symbol->text[0];
                 textpart[1] = '\0';
                 textpos = -5;
@@ -1644,7 +1748,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                             svg += _w;
                             svg += "\" height=\"";
                             svg += _h;
-                            svg += "\" />\n";
+                            if(isCMYK){
+                                svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                            }else{
+                                svg += "\" />\n";
+                            }
                         }
                     }
                 }
@@ -1661,7 +1769,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                     svg += _w;
                     svg += "\" height=\"";
                     svg += _h;
-                    svg += "\" />\n";
+                    if(isCMYK){
+                        svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                    }else{
+                        svg += "\" />\n";
+                    }
                     sprintf(_x, "%.2f", 0.0);
                     sprintf(_y, "%.2f", (symbol->height + symbol->border_width) * scaler);
                     sprintf(_w, "%.2f", (symbol->width + xoffset + xoffset) * scaler);
@@ -1674,7 +1786,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                     svg += _w;
                     svg += "\" height=\"";
                     svg += _h;
-                    svg += "\" />\n";
+                    if(isCMYK){
+                        svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                    }else{
+                        svg += "\" />\n";
+                    }
                 }
                 if((symbol->output_options & BARCODE_BOX) != 0) {
                     /* side bars */
@@ -1690,7 +1806,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                     svg += _w;
                     svg += "\" height=\"";
                     svg += _h;
-                    svg += "\" />\n";
+                    if(isCMYK){
+                        svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                    }else{
+                        svg += "\" />\n";
+                    }
                     sprintf(_x, "%.2f", (symbol->width + xoffset + xoffset - symbol->border_width) * scaler);
                     sprintf(_y, "%.2f", 0.0);
                     sprintf(_w, "%.2f", symbol->border_width * scaler);
@@ -1703,7 +1823,11 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                     svg += _w;
                     svg += "\" height=\"";
                     svg += _h;
-                    svg += "\" />\n";
+                    if(isCMYK){
+                        svg += "\" fill=\"#000000 device-cmyk(0, 0, 0, 1)\" />\n";
+                    }else{
+                        svg += "\" />\n";
+                    }
                 }
                 break;
         }

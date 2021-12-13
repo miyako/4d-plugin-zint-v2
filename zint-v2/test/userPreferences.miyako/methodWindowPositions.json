@@ -1,4 +1,4 @@
-﻿{
+{
 	"Sources/DatabaseMethods/onStartup.4dm": {
 		"left": 322,
 		"top": 651,
@@ -162,8 +162,8 @@
 		"height": 533
 	},
 	"Sources/Methods/TEST_SVG12.4dm": {
-		"left": 471,
-		"top": 479,
+		"left": 382,
+		"top": 265,
 		"width": 778,
 		"height": 488
 	}

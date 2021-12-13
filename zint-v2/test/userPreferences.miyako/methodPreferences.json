@@ -1,4 +1,4 @@
-﻿{
+{
 	"Sources/Methods/generate_project_xcode.4dm": {
 		"startSelection": 0,
 		"endSelection": 0,
@@ -198,12 +198,12 @@
 		"stamp": "2021-03-21T13:51:18.091Z"
 	},
 	"Sources/Methods/TEST_SVG12.4dm": {
-		"startSelection": 39,
-		"endSelection": 39,
-		"firstSelectedLine": 3,
-		"lastSelectedLine": 3,
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 14,
+		"lastSelectedLine": 14,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2021-12-13T20:26:20.269Z"
+		"stamp": "2021-12-13T20:48:37.861Z"
 	}
 }

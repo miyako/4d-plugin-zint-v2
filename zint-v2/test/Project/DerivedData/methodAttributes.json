@@ -1,11 +1,5 @@
-﻿{
+{
 	"methods": {
-		"TEST_SVG12": {
-			"timeStamp": "2021-12-13T20:25:39.796Z",
-			"attributes": {
-				"invisible": true
-			}
-		},
 		"generate_file_from_template": {
 			"timeStamp": "2021-12-13T19:43:03.841Z",
 			"attributes": {
@@ -32,6 +26,12 @@
 			"attributes": {
 				"invisible": true,
 				"preemptive": "capable"
+			}
+		},
+		"TEST_SVG12": {
+			"timeStamp": "2021-12-13T20:48:37.861Z",
+			"attributes": {
+				"invisible": true
 			}
 		},
 		"TEST_MICROQR": {
