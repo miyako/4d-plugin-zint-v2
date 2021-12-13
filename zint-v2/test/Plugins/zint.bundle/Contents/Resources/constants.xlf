@@ -277,6 +277,9 @@
         <trans-unit d4:value="2:L" id="6A76B1166AEA48BD93BF51F800960F34.2">
             <source>ZINT_Format_PNG</source>
         </trans-unit>
+        <trans-unit d4:value="3:L" id="6A76B1166AEA48BD93BF51F800960F34.3">
+            <source>ZINT_Format_SVG_12</source>
+        </trans-unit>
     </group>
     <group resname="themes">
         <trans-unit id="" resname="92EAB1E453D34AB18B5E288CE29FBF55" translate="no">

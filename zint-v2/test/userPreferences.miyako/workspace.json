@@ -1,7 +1,12 @@
 ﻿{
 	"editors": [
 		{
-			"type": "toolbox"
+			"type": "method",
+			"id": 2147483637,
+			"codeDescriptor": {
+				"type": 1,
+				"methodName": "TEST_SVG12"
+			}
 		},
 		{
 			"type": "explorer"

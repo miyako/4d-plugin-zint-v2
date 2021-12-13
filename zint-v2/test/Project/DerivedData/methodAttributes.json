@@ -1,61 +1,67 @@
 ﻿{
 	"methods": {
+		"TEST_SVG12": {
+			"timeStamp": "2021-12-13T20:25:39.796Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
 		"generate_file_from_template": {
-			"timeStamp": "2019-07-29T04:26:04.000Z",
+			"timeStamp": "2021-12-13T19:43:03.841Z",
 			"attributes": {
 				"invisible": true,
 				"preemptive": "capable"
 			}
 		},
 		"generate_project_infoplist": {
-			"timeStamp": "2019-07-02T13:51:21.000Z",
+			"timeStamp": "2021-12-13T19:43:03.841Z",
 			"attributes": {
 				"invisible": true,
 				"preemptive": "capable"
 			}
 		},
 		"generate_constants_xlf": {
-			"timeStamp": "2019-07-29T04:26:04.000Z",
+			"timeStamp": "2021-12-13T19:43:03.841Z",
 			"attributes": {
 				"invisible": true,
 				"preemptive": "capable"
 			}
 		},
 		"generate_project_xcode": {
-			"timeStamp": "2019-07-02T13:57:13.000Z",
+			"timeStamp": "2021-12-13T19:43:03.841Z",
 			"attributes": {
 				"invisible": true,
 				"preemptive": "capable"
 			}
 		},
 		"TEST_MICROQR": {
-			"timeStamp": "2021-03-21T13:51:18.091Z"
+			"timeStamp": "2021-12-13T19:43:03.841Z"
 		},
 		"TEST_SVG": {
-			"timeStamp": "2021-03-21T13:34:31.710Z",
+			"timeStamp": "2021-12-13T19:43:03.841Z",
 			"attributes": {
 				"invisible": true
 			}
 		},
 		"generate_project": {
-			"timeStamp": "2019-11-26T00:00:28.000Z"
+			"timeStamp": "2021-12-13T19:43:03.841Z"
 		},
 		"generate_project_vs": {
-			"timeStamp": "2019-07-24T08:49:03.000Z",
+			"timeStamp": "2021-12-13T19:43:03.841Z",
 			"attributes": {
 				"invisible": true,
 				"preemptive": "capable"
 			}
 		},
 		"generate_project_plugin_stub": {
-			"timeStamp": "2019-07-23T08:36:58.000Z",
+			"timeStamp": "2021-12-13T19:43:03.841Z",
 			"attributes": {
 				"invisible": true,
 				"preemptive": "capable"
 			}
 		},
 		"generate_project_source": {
-			"timeStamp": "2019-07-02T14:36:13.000Z",
+			"timeStamp": "2021-12-13T19:43:03.841Z",
 			"attributes": {
 				"invisible": true,
 				"preemptive": "capable"
