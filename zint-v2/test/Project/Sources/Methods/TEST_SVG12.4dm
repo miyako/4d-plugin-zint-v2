@@ -10,6 +10,6 @@ $params[ZINT_HEIGHT]:=30
 $params[ZINT_BOX]:=True:C214
 $params[ZINT_BORDER]:=0
 
-$status:=ZINT ("123456";$params)
+$status:=ZINT("123456"; $params)
 
-WRITE PICTURE FILE:C680(System folder:C487(Desktop:K41:16)+"test.svg";$status.image)
+WRITE PICTURE FILE:C680(System folder:C487(Desktop:K41:16)+"test.svg"; $status.image)
