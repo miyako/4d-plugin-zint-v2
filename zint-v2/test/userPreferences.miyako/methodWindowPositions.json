@@ -166,5 +166,17 @@
 		"top": 265,
 		"width": 778,
 		"height": 488
+	},
+	"Sources/Forms/Formular1/ObjectMethods/Schaltfläche.4dm": {
+		"left": 517,
+		"top": 495,
+		"width": 1047,
+		"height": 503
+	},
+	"Sources/Methods/TEST_ISBN.4dm": {
+		"left": 184,
+		"top": 599,
+		"width": 1047,
+		"height": 503
 	}
 }

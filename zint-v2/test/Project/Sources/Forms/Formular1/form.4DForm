@@ -1,0 +1,78 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onPageChange",
+		"onValidate",
+		"onClick",
+		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
+		"onDrop",
+		"onAfterKeystroke",
+		"onMenuSelect",
+		"onPluginArea",
+		"onAfterEdit",
+		"onTimer",
+		"onBoundVariableChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"Eingabe": {
+					"type": "input",
+					"left": 51,
+					"top": 31,
+					"width": 326,
+					"height": 80
+				},
+				"Schaltfläche": {
+					"type": "button",
+					"text": "Button",
+					"top": 263,
+					"left": 269,
+					"width": 108,
+					"height": 35,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Schaltfläche.4dm"
+				},
+				"QRCode": {
+					"type": "input",
+					"left": 51,
+					"top": 144,
+					"width": 182,
+					"height": 160,
+					"dataSourceTypeHint": "picture"
+				}
+			}
+		}
+	],
+	"geometryStamp": 10,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

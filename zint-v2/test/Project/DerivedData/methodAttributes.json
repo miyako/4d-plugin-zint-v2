@@ -7,6 +7,12 @@
 				"preemptive": "capable"
 			}
 		},
+		"TEST_ISBN": {
+			"timeStamp": "2022-02-17T00:55:41.896Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
 		"generate_project_infoplist": {
 			"timeStamp": "2021-12-13T19:43:03.841Z",
 			"attributes": {
@@ -29,13 +35,16 @@
 			}
 		},
 		"TEST_SVG12": {
-			"timeStamp": "2021-12-23T04:36:13.997Z",
+			"timeStamp": "2021-12-23T04:38:24.860Z",
 			"attributes": {
 				"invisible": true
 			}
 		},
 		"TEST_MICROQR": {
-			"timeStamp": "2021-12-13T19:43:03.841Z"
+			"timeStamp": "2022-02-17T00:11:52.657Z",
+			"attributes": {
+				"invisible": true
+			}
 		},
 		"TEST_SVG": {
 			"timeStamp": "2021-12-13T19:43:03.841Z",

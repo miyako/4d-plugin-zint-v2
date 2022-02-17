@@ -1,8 +1,8 @@
-﻿{
-	"Sources/Forms/test/form.4DForm": {
-		"left": 182,
-		"top": 308,
-		"width": 720,
-		"height": 400
+{
+	"Sources/Forms/Formular1/form.4DForm": {
+		"left": 517,
+		"top": 467,
+		"width": 1047,
+		"height": 531
 	}
 }

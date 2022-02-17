@@ -50,75 +50,91 @@ void ZINT(PA_PluginParameters params) {
         zint_symbol *sym = ZBarcode_Create();
         
         if(sym) {
+            
             int rotate_angle = 0;
             int dpi = 72;
             bool no_background = true;
             int format = (int)ob_get_n(options, L"format");
             sym->symbology = (int)ob_get_n(options, L"type");
             int height = (int)ob_get_n(options, L"height");
+            
             if((height >= 1) && (height <= 1000))
             {
                 sym->height = height;
             }
+            
             int whitespace = (int)ob_get_n(options, L"white_space");
             if((whitespace >= 0) && (whitespace <= 1000))
             {
                 sym->whitespace_width = whitespace;
             }
+            
             int border = (int)ob_get_n(options, L"border");
             if((border >= 0) && (border <= 1000))
             {
                 sym->border_width = border;
             }
+            
             if(ob_get_b(options, L"box")) {
                 sym->output_options += BARCODE_BOX;
             }
+            
             if(ob_get_b(options, L"bind")) {
                 sym->output_options += BARCODE_BIND;
             }
+            
             if(ob_is_defined(options, L"no_background")) {
                 no_background = ob_get_b(options, L"no_background");
             }
+            
             if(ob_is_defined(options, L"GS1")) {
                 if(ob_get_b(options, L"GS1")) {
                     sym->input_mode = GS1_MODE;
                 }
             }
+            
             if(ob_is_defined(options, L"no_text")) {
                 if(ob_get_b(options, L"no_text")) {
                     sym->show_hrt = 0;
                 }
             }
+            
             if(ob_is_defined(options, L"square")) {
                 if(ob_get_b(options, L"square")) {
                     sym->option_3 = DM_SQUARE;
                 }
             }
+            
             if(ob_is_defined(options, L"kanji")) {
                 if(ob_get_b(options, L"kanji")) {
                     sym->input_mode = KANJI_MODE;//conversion is handled by zint
                 }
             }
+            
             if(ob_is_defined(options, L"SJIS")) {
                 if(ob_get_b(options, L"SJIS")) {
                     sym->input_mode = SJIS_MODE;//conversion is handled by zint
                 }
             }
+            
             if(ob_is_defined(options, L"small_text")) {
                 if(ob_get_b(options, L"small_text")) {
                     sym->output_options += SMALL_TEXT;
                 }
             }
+            
             int _dpi = (int)ob_get_n(options, L"dpi");
             if (_dpi > 72)
             {
                 dpi = _dpi;
             }
+            
             float scale = (float)ob_get_n(options, L"scale");
             if(scale >= 0.01)
             {
                 sym->scale = scale;
             }
+            
             int rotate = (int)ob_get_n(options, L"rotate");
             switch(rotate)
             {
@@ -127,21 +143,31 @@ void ZINT(PA_PluginParameters params) {
                 case 270: rotate_angle = 270; break;
                 default: rotate_angle = 0; break;
             }
-            int columns = (int)ob_get_n(options, L"columns");
-            if((columns >= 1) && (columns <= 30))
-            {
-                sym->option_2 = columns;
+            
+            if(ob_is_defined(options, L"columns")){
+                int columns = (int)ob_get_n(options, L"columns");
+                if((columns >= 1) && (columns <= 30))
+                {
+                    sym->option_2 = columns;
+                }
             }
-            int version = (int)ob_get_n(options, L"version");
-            if((version >= 1) && (version <= 40))
-            {
-                sym->option_2 = version;
+
+            if(ob_is_defined(options, L"version")){
+                int version = (int)ob_get_n(options, L"version");
+                if((version >= 1) && (version <= 40))
+                {
+                    sym->option_2 = version;
+                }
             }
-            int secure = (int)ob_get_n(options, L"secure");
-            if((secure >= 1) && (secure <= 8))
-            {
-                sym->option_1 = secure;
+
+            if(ob_is_defined(options, L"secure")){
+                int secure = (int)ob_get_n(options, L"secure");
+                if((secure >= 1) && (secure <= 8))
+                {
+                    sym->option_1 = secure;
+                }
             }
+            
             CUTF8String primary;
             if(ob_get_s(options, L"primary", &primary)) {
                 if(primary.length() <= 90)
@@ -149,12 +175,15 @@ void ZINT(PA_PluginParameters params) {
                     strcpy(sym->primary, (const char *)primary.c_str());
                 }
             }
-            int mode = (int)ob_get_n(options, L"mode");
-            if((mode >= 0) && (mode <= 6))
-            {
-                sym->option_1 = mode;
-            }
             
+            if(ob_is_defined(options, L"mode")){
+                int mode = (int)ob_get_n(options, L"mode");
+                if((mode >= 0) && (mode <= 6))
+                {
+                    sym->option_1 = mode;
+                }
+            }
+
             uint32_t dataSize = (inData.getUTF16Length() * sizeof(PA_Unichar) * 2)+ sizeof(uint8_t);
             std::vector<char> buf(dataSize);
             
@@ -204,25 +233,53 @@ void ZINT(PA_PluginParameters params) {
             }
             
             unsigned char *s = (unsigned char *)&buf[0];
-            
-            if(!ZBarcode_Encode(sym, s, n))
-            {
-                switch(format)
-                {
-                    case ZINT_OUTPUT_PNG:
-                        toPNG(sym, dpi, rotate_angle, no_background, returnValue);
-                        break;
-                        
-                    case ZINT_Format_SVG_12:
-                        toSVG(sym, dpi, rotate_angle, no_background, returnValue, true);
-                        break;
-                        
-                    case ZINT_OUTPUT_SVG:
-                    default:
-                        toSVG(sym, dpi, rotate_angle, no_background, returnValue);
-                        break;
-                }
-
+            int ec = ZBarcode_Encode(sym, s, n);
+            switch (ec) {
+                case ERROR_MEMORY:
+                    ob_set_s(returnValue, L"error", "ERROR_MEMORY");
+                    break;
+                case ERROR_FILE_ACCESS:
+                    ob_set_s(returnValue, L"error", "ERROR_FILE_ACCESS");
+                    break;
+                case ERROR_ENCODING_PROBLEM:
+                    ob_set_s(returnValue, L"error", "ERROR_ENCODING_PROBLEM");
+                    break;
+                case ERROR_INVALID_OPTION:
+                    ob_set_s(returnValue, L"error", "ERROR_INVALID_OPTION");
+                    break;
+                case ERROR_INVALID_CHECK:
+                    ob_set_s(returnValue, L"error", "ERROR_INVALID_CHECK");
+                    break;
+                case ERROR_INVALID_DATA:
+                    ob_set_s(returnValue, L"error", "ERROR_INVALID_DATA");
+                    break;
+                case ERROR_TOO_LONG:
+                    ob_set_s(returnValue, L"error", "ERROR_TOO_LONG");
+                    break;
+                case WARN_INVALID_OPTION:
+                    ob_set_s(returnValue, L"warning", "WARN_INVALID_OPTION");
+                    break;
+            }
+            switch (ec) {
+                case ERROR_MEMORY:
+                case ERROR_FILE_ACCESS:
+                    break;
+                default:
+                    switch(format)
+                    {
+                        case ZINT_OUTPUT_PNG:
+                            toPNG(sym, dpi, rotate_angle, no_background, returnValue);
+                            break;
+                            
+                        case ZINT_Format_SVG_12:
+                            toSVG(sym, dpi, rotate_angle, no_background, returnValue, true);
+                            break;
+                            
+                        case ZINT_OUTPUT_SVG:
+                        default:
+                            toSVG(sym, dpi, rotate_angle, no_background, returnValue);
+                            break;
+                    }
             }
             ZBarcode_Delete(sym);
         }

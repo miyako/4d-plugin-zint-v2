@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"invisible":true}
 $params:=New object:C1471
 
 $params[ZINT_TYPE]:=BARCODE_MICROQR
