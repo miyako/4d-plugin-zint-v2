@@ -4,7 +4,7 @@
 ![downloads](https://img.shields.io/github/downloads/miyako/4d-plugin-zint-v2/total)
 
 # 4d-plugin-zint-v2
-Barcode generator based on [zint](https://github.com/zint/zint)
+Barcode generator based on [zint 2.4.2](https://github.com/zint/zint)
 
 ### Syntax
 
