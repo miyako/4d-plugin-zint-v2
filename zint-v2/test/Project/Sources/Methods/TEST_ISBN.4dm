@@ -13,6 +13,6 @@ $params[ZINT_BORDER]:=0
 
 //$status:=ZINT("9784003101018"; $params)
 
-$status:=ZINT("9789151107409"; $params)
+$status:=ZINT("9789151107400"; $params)
 
 WRITE PICTURE FILE:C680(System folder:C487(Desktop:K41:16)+"test.svg"; $status.image)

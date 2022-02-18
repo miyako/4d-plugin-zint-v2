@@ -1,14 +1,6 @@
 {
 	"editors": [
 		{
-			"type": "method",
-			"id": 2147483646,
-			"codeDescriptor": {
-				"type": 1,
-				"methodName": "TEST_ISBN"
-			}
-		},
-		{
 			"type": "explorer"
 		}
 	]
