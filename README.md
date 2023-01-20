@@ -1,9 +1,13 @@
 ![version](https://img.shields.io/badge/version-17%2B-3E8B93)
 ![platform](https://img.shields.io/static/v1?label=platform&message=mac-intel%20|%20mac-arm%20|%20win-64&color=blue)
+[![license](https://img.shields.io/github/license/miyako/4d-plugin-zint-v2)](LICENSE)
 ![downloads](https://img.shields.io/github/downloads/miyako/4d-plugin-zint-v2/total)
 
-# 4d-plugin-zint-v2
-Barcode generator based on [zint 2.4.2](https://github.com/zint/zint)
+### Dependencies and Licensing
+
+* the source code of this plugin developed using the [4D Plug-in SDK](https://github.com/4d/4D-Plugin-SDK) is licensed under the [MIT license](https://github.com/miyako/4d-plugin-gs/blob/master/LICENSE).
+* see [zint](https://github.com/zint/zint) for the licensing of **zint**
+* other dependencies: **libpng** **JsonCpp**
 
 ### Syntax
 
