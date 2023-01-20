@@ -5,7 +5,7 @@
 ### Dependencies and Licensing
 
 * the source code of this plugin developed using the [4D Plug-in SDK](https://github.com/4d/4D-Plugin-SDK) is licensed under the [MIT license](https://github.com/miyako/4d-plugin-gs/blob/master/LICENSE).
-* see [Zint]([https://github.com/zint/zint](https://zint.org.uk) for the licensing of **libzint** (shared library).
+* see [Zint](https://zint.org.uk) for the licensing of **libzint** (shared library).
 * other dependencies: **libpng**, **JsonCpp**
 
 ### Syntax
