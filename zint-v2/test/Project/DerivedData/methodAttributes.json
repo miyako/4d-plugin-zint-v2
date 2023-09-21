@@ -1,79 +1,21 @@
 {
 	"methods": {
-		"generate_file_from_template": {
-			"timeStamp": "2021-12-13T19:43:03.841Z",
-			"attributes": {
-				"invisible": true,
-				"preemptive": "capable"
-			}
-		},
 		"TEST_ISBN": {
-			"timeStamp": "2022-02-18T13:34:18.320Z",
+			"timeStamp": "2022-02-18T13:34:18Z",
 			"attributes": {
 				"invisible": true
 			}
 		},
-		"generate_project_infoplist": {
-			"timeStamp": "2021-12-13T19:43:03.841Z",
-			"attributes": {
-				"invisible": true,
-				"preemptive": "capable"
-			}
-		},
-		"generate_constants_xlf": {
-			"timeStamp": "2021-12-13T19:43:03.841Z",
-			"attributes": {
-				"invisible": true,
-				"preemptive": "capable"
-			}
-		},
-		"generate_project_xcode": {
-			"timeStamp": "2021-12-13T19:43:03.841Z",
-			"attributes": {
-				"invisible": true,
-				"preemptive": "capable"
-			}
-		},
 		"TEST_SVG12": {
-			"timeStamp": "2022-02-17T01:07:11.275Z",
+			"timeStamp": "2022-02-17T01:07:11Z",
 			"attributes": {
 				"invisible": true
 			}
 		},
 		"TEST_MICROQR": {
-			"timeStamp": "2022-02-17T00:11:52.657Z",
+			"timeStamp": "2022-02-17T00:11:52Z",
 			"attributes": {
 				"invisible": true
-			}
-		},
-		"TEST_SVG": {
-			"timeStamp": "2021-12-13T19:43:03.841Z",
-			"attributes": {
-				"invisible": true
-			}
-		},
-		"generate_project": {
-			"timeStamp": "2021-12-13T19:43:03.841Z"
-		},
-		"generate_project_vs": {
-			"timeStamp": "2021-12-13T19:43:03.841Z",
-			"attributes": {
-				"invisible": true,
-				"preemptive": "capable"
-			}
-		},
-		"generate_project_plugin_stub": {
-			"timeStamp": "2021-12-13T19:43:03.841Z",
-			"attributes": {
-				"invisible": true,
-				"preemptive": "capable"
-			}
-		},
-		"generate_project_source": {
-			"timeStamp": "2021-12-13T19:43:03.841Z",
-			"attributes": {
-				"invisible": true,
-				"preemptive": "capable"
 			}
 		}
 	}

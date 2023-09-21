@@ -23,54 +23,6 @@
 		"width": 1138,
 		"height": 592
 	},
-	"Sources/Methods/generate_project_xcode.4dm": {
-		"left": 511,
-		"top": 304,
-		"width": 1129,
-		"height": 787
-	},
-	"Sources/Methods/generate_constants_xlf.4dm": {
-		"left": 478,
-		"top": 165,
-		"width": 1129,
-		"height": 762
-	},
-	"Sources/Methods/generate_project_vs.4dm": {
-		"left": 478,
-		"top": 165,
-		"width": 1129,
-		"height": 762
-	},
-	"Sources/Methods/generate_project.4dm": {
-		"left": 633,
-		"top": 386,
-		"width": 748,
-		"height": 412
-	},
-	"Sources/Methods/generate_project_source.4dm": {
-		"left": 511,
-		"top": 304,
-		"width": 1129,
-		"height": 787
-	},
-	"Sources/Methods/generate_file_from_template.4dm": {
-		"left": 478,
-		"top": 165,
-		"width": 1129,
-		"height": 762
-	},
-	"Sources/Methods/generate_project_plugin_stub.4dm": {
-		"left": 500,
-		"top": 130,
-		"width": 720,
-		"height": 399
-	},
-	"Sources/Methods/generate_project_infoplist.4dm": {
-		"left": 305,
-		"top": 248,
-		"width": 1129,
-		"height": 762
-	},
 	"Sources/Forms/フォーム1/ObjectMethods/ボタン.4dm": {
 		"left": 490,
 		"top": 229,
@@ -149,17 +101,11 @@
 		"width": 877,
 		"height": 662
 	},
-	"Sources/Methods/TEST_SVG.4dm": {
-		"left": 257,
-		"top": 414,
-		"width": 877,
-		"height": 533
-	},
 	"Sources/Methods/TEST_MICROQR.4dm": {
 		"left": 139,
-		"top": 336,
-		"width": 877,
-		"height": 533
+		"top": 364,
+		"width": 965,
+		"height": 505
 	},
 	"Sources/Methods/TEST_SVG12.4dm": {
 		"left": 382,
@@ -175,8 +121,62 @@
 	},
 	"Sources/Methods/TEST_ISBN.4dm": {
 		"left": 301,
-		"top": 292,
+		"top": 320,
 		"width": 1047,
-		"height": 503
+		"height": 475
+	},
+	"Trash/Methods/(generate_project_source).4dm": {
+		"left": 511,
+		"top": 304,
+		"width": 1129,
+		"height": 787
+	},
+	"Trash/Methods/(generate_project_plugin_stub).4dm": {
+		"left": 500,
+		"top": 130,
+		"width": 720,
+		"height": 399
+	},
+	"Trash/Methods/(generate_project_vs).4dm": {
+		"left": 478,
+		"top": 165,
+		"width": 1129,
+		"height": 762
+	},
+	"Trash/Methods/(generate_project).4dm": {
+		"left": 633,
+		"top": 386,
+		"width": 748,
+		"height": 412
+	},
+	"Trash/Methods/(TEST_SVG).4dm": {
+		"left": 257,
+		"top": 414,
+		"width": 877,
+		"height": 533
+	},
+	"Trash/Methods/(generate_project_xcode).4dm": {
+		"left": 511,
+		"top": 304,
+		"width": 1129,
+		"height": 787
+	},
+	"Trash/Methods/(generate_constants_xlf).4dm": {
+		"left": 478,
+		"top": 165,
+		"width": 1129,
+		"height": 762
+	},
+	"Trash/Methods/(generate_project_infoplist).4dm": {
+		"left": 305,
+		"top": 248,
+		"width": 1129,
+		"height": 762
+	},
+	"Trash/Methods/(generate_file_from_template).4dm": {
+		"left": 478,
+		"top": 165,
+		"width": 1129,
+		"height": 762
 	}
 }
