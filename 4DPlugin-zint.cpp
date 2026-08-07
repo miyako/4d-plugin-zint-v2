@@ -89,7 +89,7 @@ void ZINT(PA_PluginParameters params) {
             
             if(ob_is_defined(options, L"GS1")) {
                 if(ob_get_b(options, L"GS1")) {
-                    sym->input_mode = GS1_MODE;
+                    sym->input_mode |= GS1_MODE;
                 }
             }
             
@@ -107,13 +107,13 @@ void ZINT(PA_PluginParameters params) {
             
             if(ob_is_defined(options, L"kanji")) {
                 if(ob_get_b(options, L"kanji")) {
-                    sym->input_mode = KANJI_MODE;//conversion is handled by zint
+                    sym->input_mode |= KANJI_MODE;//conversion is handled by zint
                 }
             }
             
             if(ob_is_defined(options, L"SJIS")) {
                 if(ob_get_b(options, L"SJIS")) {
-                    sym->input_mode = SJIS_MODE;//conversion is handled by zint
+                    sym->input_mode |= SJIS_MODE;//conversion is handled by zint
                 }
             }
             
@@ -130,7 +130,7 @@ void ZINT(PA_PluginParameters params) {
             }
             
             float scale = (float)ob_get_n(options, L"scale");
-            if(scale >= 0.01)
+            if((scale >= 0.01) && (scale <= 100.0))
             {
                 sym->scale = scale;
             }
@@ -189,7 +189,7 @@ void ZINT(PA_PluginParameters params) {
             
 			int n = 0;
 
-			if (sym->input_mode == SJIS_MODE) {
+			if (sym->input_mode & SJIS_MODE) {
 
 				n = PA_ConvertCharsetToCharset((char *)inData.getUTF16StringPtr(),
 					inData.getUTF16Length() * sizeof(PA_Unichar),
@@ -2398,7 +2398,7 @@ void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
     {
         png_structp  png_ptr;
         png_infop  info_ptr;
-        png_colorp palette;
+        png_colorp volatile palette = NULL;
         unsigned int fg_color[4] = {0, 0, 0, 255};
         unsigned int bg_color[4] = {255, 255, 255, 255};
         png_byte alpha_values[2];
@@ -2417,6 +2417,9 @@ void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 }else
                 {
                     if(setjmp(png_jmpbuf(png_ptr))) {
+                        if(palette != NULL) {
+                            free(palette);
+                        }
                         png_destroy_write_struct(&png_ptr, &info_ptr);
                     }else
                     {
@@ -2566,7 +2569,7 @@ void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                                     }
                                     break;
                                 case 270:
-                                    for(_row = 0; _row < image_width; row++) {
+                                    for(_row = 0; _row < image_width; _row++) {
                                         for(_column = 0; _column < image_height; _column++) {
                                             i = _column * 3;
                                             switch(*(pixelbuf + (image_width * _column) + (image_width - _row - 1)))
