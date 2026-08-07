@@ -169,7 +169,7 @@ void ZINT(PA_PluginParameters params) {
             }
             
             CUTF8String primary;
-            if(ob_get_s(options, L"primary", &primary)) {
+            if(ob_get_a(options, L"primary", &primary)) {
                 if(primary.length() <= 90)
                 {
                     strcpy(sym->primary, (const char *)primary.c_str());
