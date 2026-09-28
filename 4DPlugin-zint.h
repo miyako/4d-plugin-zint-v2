@@ -41,6 +41,7 @@
 #define ZINT_SMALL_TEXT 21
 #define ZINT_DPI 22
 #define ZINT_NO_BACKGROUND 23
+#define ZINT_WHITE_SPACE_HEIGHT 24
 
 #define ZINT_OUTPUT_SVG 1
 #define ZINT_OUTPUT_PNG 2
@@ -61,8 +62,8 @@ void ZINT(PA_PluginParameters params);
 extern "C" { FILE __iob_func[3] = { *stdin,*stdout,*stderr }; }
 #endif
 
-void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o, bool isCMYK = false);
-void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o);
+void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o, int whitespace_height = 0, bool isCMYK = false);
+void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o, int whitespace_height = 0);
 
 void write_data_fn(png_structp png_ptr, png_bytep buf, png_size_t size);
 void output_flush_fn(png_structp png_ptr);

@@ -353,5 +353,8 @@
         <trans-unit d4:value="format:S" id="92EAB1E453D34AB18B5E288CE29FBF55.22">
             <source>ZINT_FORMAT</source>
         </trans-unit>
+        <trans-unit d4:value="white_space_height:S" id="92EAB1E453D34AB18B5E288CE29FBF55.23">
+            <source>ZINT_WHITE_SPACE_HEIGHT</source>
+        </trans-unit>
     </group>
 </xliff>

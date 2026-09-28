@@ -69,6 +69,13 @@ void ZINT(PA_PluginParameters params) {
                 sym->whitespace_width = whitespace;
             }
             
+            int whitespace_height = 0;
+            int _whitespace_height = (int)ob_get_n(options, L"white_space_height");
+            if((_whitespace_height >= 0) && (_whitespace_height <= 1000))
+            {
+                whitespace_height = _whitespace_height;
+            }
+            
             int border = (int)ob_get_n(options, L"border");
             if((border >= 0) && (border <= 1000))
             {
@@ -268,16 +275,16 @@ void ZINT(PA_PluginParameters params) {
                     switch(format)
                     {
                         case ZINT_OUTPUT_PNG:
-                            toPNG(sym, dpi, rotate_angle, no_background, returnValue);
+                            toPNG(sym, dpi, rotate_angle, no_background, returnValue, whitespace_height);
                             break;
                             
                         case ZINT_Format_SVG_12:
-                            toSVG(sym, dpi, rotate_angle, no_background, returnValue, true);
+                            toSVG(sym, dpi, rotate_angle, no_background, returnValue, whitespace_height, true);
                             break;
                             
                         case ZINT_OUTPUT_SVG:
                         default:
-                            toSVG(sym, dpi, rotate_angle, no_background, returnValue);
+                            toSVG(sym, dpi, rotate_angle, no_background, returnValue, whitespace_height);
                             break;
                     }
             }
@@ -526,7 +533,7 @@ void output_flush_fn(png_structp png_ptr)
     
 }
 
-void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o, bool isCMYK) {
+void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o, int whitespace_height, bool isCMYK) {
     
         int i, block_width, latch, r, this_row;
         float textpos, large_bar_height, preset_height, row_height, row_posn = 0.0;
@@ -624,12 +631,12 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
             textoffset = 0;
         }
         xoffset = symbol->border_width + symbol->whitespace_width;
-        yoffset = symbol->border_width;
+        yoffset = symbol->border_width + whitespace_height;
         
         if(((symbol->output_options & BARCODE_BOX) != 0) || ((symbol->output_options & BARCODE_BIND) != 0)) {
-            default_text_posn = (symbol->height + textoffset + symbol->border_width + symbol->border_width) * scaler;
+            default_text_posn = (symbol->height + textoffset + (2 * whitespace_height) + symbol->border_width + symbol->border_width) * scaler;
         } else {
-            default_text_posn = (symbol->height + textoffset + symbol->border_width) * scaler;
+            default_text_posn = (symbol->height + textoffset + (2 * whitespace_height) + symbol->border_width) * scaler;
         }
         
         
@@ -831,7 +838,7 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 }else{
                     svg += "\" />\n";
                 }
-                sprintf(_y, "%.2f", (72.0 + symbol->border_width) * scaler);
+                sprintf(_y, "%.2f", (72.0 + (2 * whitespace_height) + symbol->border_width) * scaler);
                 svg += "<rect x=\"";
                 svg += _x;
                 svg += "\" y=\"";
@@ -851,7 +858,7 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 sprintf(_x, "%.2f", 0.0);
                 sprintf(_y, "%.2f", 0.0);
                 sprintf(_w, "%.2f", symbol->border_width * scaler);
-                sprintf(_h, "%.2f", (72.0 + (2 * symbol->border_width)) * scaler);
+                sprintf(_h, "%.2f", (72.0 + (2 * whitespace_height) + (2 * symbol->border_width)) * scaler);
                 svg += "<rect x=\"";
                 svg += _x;
                 svg += "\" y=\"";
@@ -1832,7 +1839,7 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                         svg += "\" />\n";
                     }
                     sprintf(_x, "%.2f", 0.0);
-                    sprintf(_y, "%.2f", (symbol->height + symbol->border_width) * scaler);
+                    sprintf(_y, "%.2f", (symbol->height + (2 * whitespace_height) + symbol->border_width) * scaler);
                     sprintf(_w, "%.2f", (symbol->width + xoffset + xoffset) * scaler);
                     sprintf(_h, "%.2f", symbol->border_width * scaler);
                     svg += "<rect x=\"";
@@ -1854,7 +1861,7 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                     sprintf(_x, "%.2f", 0.0);
                     sprintf(_y, "%.2f", 0.0);
                     sprintf(_w, "%.2f", symbol->border_width * scaler);
-                    sprintf(_h, "%.2f", (symbol->height + (2 * symbol->border_width)) * scaler);
+                    sprintf(_h, "%.2f", (symbol->height + (2 * whitespace_height) + (2 * symbol->border_width)) * scaler);
                     svg += "<rect x=\"";
                     svg += _x;
                     svg += "\" y=\"";
@@ -1871,7 +1878,7 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                     sprintf(_x, "%.2f", (symbol->width + xoffset + xoffset - symbol->border_width) * scaler);
                     sprintf(_y, "%.2f", 0.0);
                     sprintf(_w, "%.2f", symbol->border_width * scaler);
-                    sprintf(_h, "%.2f", (symbol->height + (2 * symbol->border_width)) * scaler);
+                    sprintf(_h, "%.2f", (symbol->height + (2 * whitespace_height) + (2 * symbol->border_width)) * scaler);
                     svg += "<rect x=\"";
                     svg += _x;
                     svg += "\" y=\"";
@@ -1929,7 +1936,7 @@ void toSVG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
     }
 }
 
-void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o) {
+void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, PA_ObjectRef o, int whitespace_height) {
 
         //parameters to png_pixel_plot
         int image_height = 0;
@@ -1942,7 +1949,7 @@ void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
             int xoffset, yoffset;
             
             xoffset = symbol->border_width + symbol->whitespace_width;
-            yoffset = symbol->border_width;
+            yoffset = symbol->border_width + whitespace_height;
             image_width = 300 + (2 * xoffset * 2);
             image_height = 300 + (2 * yoffset * 2);
             
@@ -1976,7 +1983,7 @@ void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 if(((symbol->output_options & BARCODE_BOX) != 0) || ((symbol->output_options & BARCODE_BIND) != 0)) {
                     /* boundary bars */
                     zint::draw_bar(pixelbuf, 0, image_width, 0, symbol->border_width * 2, image_width, image_height);
-                    zint::draw_bar(pixelbuf, 0, image_width, 300 + (symbol->border_width * 2), symbol->border_width * 2, image_width, image_height);
+                    zint::draw_bar(pixelbuf, 0, image_width, 300 + (symbol->border_width * 2) + (whitespace_height * 4), symbol->border_width * 2, image_width, image_height);
                 }
                 
                 if((symbol->output_options & BARCODE_BOX) != 0) {
@@ -2098,7 +2105,7 @@ void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 textoffset = 0;
             }
             xoffset = symbol->border_width + symbol->whitespace_width;
-            yoffset = symbol->border_width;
+            yoffset = symbol->border_width + whitespace_height;
             image_width = 2 * (symbol->width + xoffset + xoffset);
             image_height = 2 * (symbol->height + textoffset + yoffset + yoffset);
             
@@ -2112,9 +2119,9 @@ void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 }
                 
                 if(((symbol->output_options & BARCODE_BOX) != 0) || ((symbol->output_options & BARCODE_BIND) != 0)) {
-                    default_text_posn = image_height - 17;
+                    default_text_posn = image_height - 17 - (2 * whitespace_height);
                 } else {
-                    default_text_posn = image_height - 17 - symbol->border_width - symbol->border_width;
+                    default_text_posn = image_height - 17 - (2 * whitespace_height) - symbol->border_width - symbol->border_width;
                 }
                 
                 row_posn = textoffset + yoffset;
@@ -2367,7 +2374,7 @@ void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 if(((symbol->output_options & BARCODE_BOX) != 0) || ((symbol->output_options & BARCODE_BIND) != 0)) {
                     /* boundary bars */
                     zint::draw_bar(pixelbuf, 0, (symbol->width + xoffset + xoffset) * 2, textoffset * 2, symbol->border_width * 2, image_width, image_height);
-                    zint::draw_bar(pixelbuf, 0, (symbol->width + xoffset + xoffset) * 2, (textoffset + symbol->height + symbol->border_width) * 2, symbol->border_width * 2, image_width, image_height);
+                    zint::draw_bar(pixelbuf, 0, (symbol->width + xoffset + xoffset) * 2, (textoffset + symbol->height + (2 * whitespace_height) + symbol->border_width) * 2, symbol->border_width * 2, image_width, image_height);
                     if((symbol->output_options & BARCODE_BIND) != 0) {
                         if((symbol->rows > 1) && (zint::is_stackable(symbol->symbology) == 1)) {
                             /* row binding */
@@ -2380,8 +2387,8 @@ void toPNG(zint_symbol *symbol, int dpi, int rotate_angle, bool no_background, P
                 
                 if((symbol->output_options & BARCODE_BOX) != 0) {
                     /* side bars */
-                    zint::draw_bar(pixelbuf, 0, symbol->border_width * 2, textoffset * 2, (symbol->height + (2 * symbol->border_width)) * 2, image_width, image_height);
-                    zint::draw_bar(pixelbuf, (symbol->width + xoffset + xoffset - symbol->border_width) * 2, symbol->border_width * 2, textoffset * 2, (symbol->height + (2 * symbol->border_width)) * 2, image_width, image_height);
+                    zint::draw_bar(pixelbuf, 0, symbol->border_width * 2, textoffset * 2, (symbol->height + (2 * whitespace_height) + (2 * symbol->border_width)) * 2, image_width, image_height);
+                    zint::draw_bar(pixelbuf, (symbol->width + xoffset + xoffset - symbol->border_width) * 2, symbol->border_width * 2, textoffset * 2, (symbol->height + (2 * whitespace_height) + (2 * symbol->border_width)) * 2, image_width, image_height);
                 }
                 
                 /* Put the human readable text at the bottom */
