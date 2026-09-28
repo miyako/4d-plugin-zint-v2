@@ -1,3 +1,5 @@
 *.DS_Store
 zint-v2/build/*
 build/*
+test/userPreferences.*
+test/Project/DerivedData/*

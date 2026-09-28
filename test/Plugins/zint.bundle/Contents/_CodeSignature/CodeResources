@@ -13,10 +13,6 @@
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/constants.xlf</key>
-		<data>
-		DB7PJfj5rgjuS9ko2uNqcSTbSkg=
-		</data>
 		<key>Resources/manifest.json</key>
 		<data>
 		yHvseOBhrTad4tefB1F2qEZD0IE=
@@ -24,13 +20,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>QuickLook/Thumbnail.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			nGfrvibB5KlzvZgF4Bra+l0HpRloxismgTLePnOwCdk=
-			</data>
-		</dict>
 		<key>Resources/English.lproj/InfoPlist.strings</key>
 		<dict>
 			<key>hash2</key>
@@ -39,13 +28,6 @@
 			</data>
 			<key>optional</key>
 			<true/>
-		</dict>
-		<key>Resources/constants.xlf</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			fw0Kb3canbIrQAeF0t8pb7lE6k2cFcUYZx5+kkdGbmE=
-			</data>
 		</dict>
 		<key>Resources/manifest.json</key>
 		<dict>
@@ -58,7 +40,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			KPt90T4/DLkVXLCPxt+azxab5xQJkq1+v2cLrotqge8=
+			S++MMnZBxpBfYBxVKfXJtvzzUWfzr5dK+zbhlbhJwl8=
 			</data>
 		</dict>
 	</dict>
