@@ -241,6 +241,9 @@ void ZINT(PA_PluginParameters params) {
             
             unsigned char *s = (unsigned char *)&buf[0];
             int ec = ZBarcode_Encode(sym, s, n);
+            if(ec != 0) {
+                ob_set_s(returnValue, L"message", sym->errtxt);
+            }
             switch (ec) {
                 case ERROR_MEMORY:
                     ob_set_s(returnValue, L"error", "ERROR_MEMORY");
@@ -267,26 +270,24 @@ void ZINT(PA_PluginParameters params) {
                     ob_set_s(returnValue, L"warning", "WARN_INVALID_OPTION");
                     break;
             }
-            switch (ec) {
-                case ERROR_MEMORY:
-                case ERROR_FILE_ACCESS:
-                    break;
-                default:
-                    switch(format)
-                    {
-                        case ZINT_OUTPUT_PNG:
-                            toPNG(sym, dpi, rotate_angle, no_background, returnValue, whitespace_height);
-                            break;
-                            
-                        case ZINT_Format_SVG_12:
-                            toSVG(sym, dpi, rotate_angle, no_background, returnValue, whitespace_height, true);
-                            break;
-                            
-                        case ZINT_OUTPUT_SVG:
-                        default:
-                            toSVG(sym, dpi, rotate_angle, no_background, returnValue, whitespace_height);
-                            break;
-                    }
+            // ERROR_TOO_LONG is the first fatal status in the bundled Zint API.
+            // A failed symbol must not be passed to either renderer.
+            if(ec < ERROR_TOO_LONG) {
+                switch(format)
+                {
+                    case ZINT_OUTPUT_PNG:
+                        toPNG(sym, dpi, rotate_angle, no_background, returnValue, whitespace_height);
+                        break;
+
+                    case ZINT_Format_SVG_12:
+                        toSVG(sym, dpi, rotate_angle, no_background, returnValue, whitespace_height, true);
+                        break;
+
+                    case ZINT_OUTPUT_SVG:
+                    default:
+                        toSVG(sym, dpi, rotate_angle, no_background, returnValue, whitespace_height);
+                        break;
+                }
             }
             ZBarcode_Delete(sym);
         }
