@@ -22,8 +22,8 @@ The ZINT plugin wraps the open-source [Zint](https://www.zint.org.uk/) barcode-e
 ## Requirements & platform notes
 
 - **Parameter 2 (`options`) is mandatory in practice, even though nothing enforces it at the API level.** If it's omitted, or if it isn't an object 4D can resolve, `ZINT` returns an empty `Object` — no `image`, no `data`, and critically, **no `error` property either**. The same silent-empty-object result also occurs on the rare internal failure of Zint's own symbol allocator. If you get back `{}` with nothing on it, check that `options` was actually passed and that it has at minimum a `type`.
-- **A non-empty result does not mean encoding succeeded.** Zint's encoder can return several non-fatal-looking error codes (see [Error handling](#error-handling--troubleshooting) below) for which the plugin still renders and returns an `image`/`data` pair from a symbol that failed to encode correctly. Always check for an `error` property first — its presence doesn't get suppressed just because an image also came back.
-- **Only `ERROR_MEMORY` and `ERROR_FILE_ACCESS` skip rendering entirely** — those two are the only codes for which the returned object has `error` but no `image`/`data` at all.
+- **Check `error` before using the result.** Fatal encoding errors return no `image` or `data`. Non-fatal warnings still allow rendering; see [Error handling](#error-handling--troubleshooting).
+- **All fatal encoding errors skip rendering**, for SVG, SVG 1.2, and PNG. Existing symbolic `error`/`warning` values are preserved; the additive `message` property contains Zint's detailed diagnostic when encoding reports an error or warning.
 - The 4D constants referenced in the plugin's own sample methods (`ZINT_TYPE`, `ZINT_FORMAT`, `ZINT_HEIGHT`, `ZINT_WHITE_SPACE`, `ZINT_SCALE`, `ZINT_BOX`, `ZINT_BORDER`, `ZINT_NO_TEXT`) aren't defined anywhere in the source files this doc was written from, so their exact resolved values aren't directly confirmed here. Given they're used as `options` property keys (e.g. `$params[ZINT_TYPE]:=...`) and the C++ reads those same properties by the literal string names `"type"`, `"format"`, `"height"`, `"white_space"`, `"scale"`, `"box"`, `"border"`, `"no_text"` — it's a near-certain but *inferred* (not directly verified) match. The property tables below always give the verified literal string key as the source of truth; use the 4D constant if your project defines it, or the plain string key otherwise.
 - The `4DPlugin-zint.h` header defines a second set of numeric constants (`ZINT_HEIGHT`, `ZINT_BORDER`, `ZINT_BOX`, etc., valued `1`–`24`) and `ZINT_OUTPUT_SVG`/`ZINT_OUTPUT_PNG`/`ZINT_Format_SVG_12` (valued `1`/`2`/`3`). Only the latter three are actually referenced anywhere in the plugin's C++ — the numbered `ZINT_HEIGHT`-style group is unused dead code in the current implementation and should **not** be assumed to correspond to anything on the 4D side.
 - As of this build, `rotate: 270` combined with PNG output renders correctly. This is a **forward-looking** statement: it reflects a fix applied during this review to a loop-variable typo that previously caused that specific combination (PNG format + 270° rotation) to hang indefinitely. If you're running an older compiled binary, confirm the fix is actually in it before relying on that combination in production.
@@ -80,10 +80,11 @@ ZINT ( data ; options ) → Object
 
 | Property | Type | Present when | Description |
 |---|---|---|---|
-| `image` | Picture | Encoding reached the rendering stage (i.e. not `ERROR_MEMORY`/`ERROR_FILE_ACCESS`) and `pixelbuf`/SVG buffer allocation succeeded. | A native 4D `Picture`. For SVG output this wraps the SVG source directly; for PNG output it wraps genuine PNG bytes. |
+| `image` | Picture | Encoding succeeded or returned a non-fatal warning, and `pixelbuf`/SVG buffer allocation succeeded. | A native 4D `Picture`. For SVG output this wraps the SVG source directly; for PNG output it wraps genuine PNG bytes. |
 | `data` | Text | Same conditions as `image`. | The same image content as text: raw SVG markup for `format` `1`/`3`, or **Base64-encoded PNG bytes** for `format` `2`. These are built through different internal code paths, so don't assume `data` is always human-readable markup — check `format` before parsing it. |
-| `error` | Text | `ZBarcode_Encode` returned one of: `ERROR_MEMORY`, `ERROR_FILE_ACCESS`, `ERROR_ENCODING_PROBLEM`, `ERROR_INVALID_OPTION`, `ERROR_INVALID_CHECK`, `ERROR_INVALID_DATA`, `ERROR_TOO_LONG`. | The literal error constant name as text (e.g. `"ERROR_TOO_LONG"`). See [Error handling](#error-handling--troubleshooting) for what each means and whether `image`/`data` still come back alongside it. |
+| `error` | Text | `ZBarcode_Encode` returned one of: `ERROR_MEMORY`, `ERROR_FILE_ACCESS`, `ERROR_ENCODING_PROBLEM`, `ERROR_INVALID_OPTION`, `ERROR_INVALID_CHECK`, `ERROR_INVALID_DATA`, `ERROR_TOO_LONG`. | The literal error constant name as text (e.g. `"ERROR_TOO_LONG"`). See [Error handling](#error-handling--troubleshooting) for what each means. Fatal encoding errors never return `image`/`data`. |
 | `warning` | Text | `ZBarcode_Encode` returned `WARN_INVALID_OPTION`. | Set instead of (not in addition to) `error` — encoding still proceeds and `image`/`data` are still populated. |
+| `message` | Text | `ZBarcode_Encode` returned a nonzero status. | Zint's detailed diagnostic (`errtxt`), supplementing the existing symbolic error/warning. Absent on successful encoding. |
 
 ### Example
 
@@ -173,7 +174,7 @@ End if
 ## Error handling & troubleshooting
 
 - **An empty `{}` result usually means `options` was missing or unresolvable, not that encoding failed.** `ZINT` only ever populates `error`/`warning` after it has successfully entered the encoding branch — omitting `options` entirely, or a rare internal `ZBarcode_Create` allocation failure, both return a plain empty object with none of `image`/`data`/`error` set. There's nothing in the current source that distinguishes these two causes from the caller's side.
-- **`error` can be present alongside a populated `image`/`data`.** Only `ERROR_MEMORY` and `ERROR_FILE_ACCESS` suppress rendering; every other error code (`ERROR_ENCODING_PROBLEM`, `ERROR_INVALID_OPTION`, `ERROR_INVALID_CHECK`, `ERROR_INVALID_DATA`, `ERROR_TOO_LONG`) and the one warning code (`WARN_INVALID_OPTION`) still fall through to rendering. Treat `error#Null` as the authoritative success/failure signal, not the presence of `image`.
+- **Fatal encoding errors return no `image`/`data`.** The bundled Zint API starts fatal statuses at `ERROR_TOO_LONG` (5). Warnings below that threshold still render. `message` contains the encoder diagnostic; callers can continue using the existing symbolic `error`/`warning` properties.
 - **`ERROR_TOO_LONG`** — the input `data` exceeds the chosen symbology's maximum data capacity.
 - **`ERROR_INVALID_DATA`** — `data` contains characters the chosen symbology (or input mode, e.g. `GS1`/numeric-only symbologies) can't encode.
 - **`ERROR_INVALID_CHECK`** — a check-digit embedded in `data` (for symbologies that validate one, e.g. ISBN) doesn't match.
@@ -226,3 +227,25 @@ If ($status.error=Null)
 	WRITE PICTURE FILE("qr.png"; $status.image)
 End if 
 ```
+
+## Error-handling regression tests
+
+Build the plug-in from this checkout, then run `TEST_error_handling` from the test
+project in 4D. It throws on failure. Alternatively, with Python 3 and tool4d:
+
+```sh
+python3 test/regression/run_4d.py --bundle /path/to/freshly/built/zint.bundle
+```
+
+Pass `--tool /path/to/tool4d` if it is not installed at the default macOS path.
+The runner creates a disposable, dataless project; it does not open the test
+project's data file or run its startup methods. A fresh build is required: the
+repository's prebuilt bundles may not contain the source changes.
+
+The tests cover invalid characters, empty input, excessive input length, a
+recoverable invalid-symbology warning, and valid Code 128/Data Matrix/QR input,
+for all three output formats. They check that fatal errors have no image/data,
+that diagnostics supplement the existing symbolic statuses, that warning
+output remains usable, and that subsequent successful calls have no stale
+diagnostic properties. Allocation failures and internal encoder faults are not
+injected by these integration tests.
